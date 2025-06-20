@@ -13,7 +13,7 @@ import java.util.UUID;
 public class StudentController {
 
     private final IStudentService studentService;
-private StudentRepository studentRepository;
+// private StudentRepository studentRepository;
 
     public StudentController(IStudentService studentService){
         this.studentService = studentService;
@@ -31,9 +31,9 @@ private StudentRepository studentRepository;
         if(search == null){
             model.addAttribute("students",studentService.findAll());
         }
-        else {
-            model.addAttribute("students",studentRepository.findByName(search));
-        }
+//        else {
+//            model.addAttribute("students",studentRepository.findByName(search));
+//        }
         return "list";
     }
 
@@ -58,18 +58,18 @@ private StudentRepository studentRepository;
         return "redirect:/students";
     }
 
-    @GetMapping("/delete")
-    public String delete(@RequestParam("id") UUID id){
-        recipeService.delete(id);
-        return "redirect:/recipe/list";
-    }
-
-    @GetMapping("/update")
-    public String update(@RequestParam("id") UUID id,Model model){
-        Recipe recipe = recipeService.getById(id);
-        model.addAttribute("recipe",recipe);
-        model.addAttribute("categories",categoryService.getAll());
-        return "recipe-form";
-    }
+//    @GetMapping("/delete")
+//    public String delete(@RequestParam("id") UUID id){
+//        recipeService.delete(id);
+//        return "redirect:/recipe/list";
+//    }
+//
+//    @GetMapping("/update")
+//    public String update(@RequestParam("id") UUID id,Model model){
+//        Recipe recipe = recipeService.getById(id);
+//        model.addAttribute("recipe",recipe);
+//        model.addAttribute("categories",categoryService.getAll());
+//        return "recipe-form";
+//    }
 
 }
