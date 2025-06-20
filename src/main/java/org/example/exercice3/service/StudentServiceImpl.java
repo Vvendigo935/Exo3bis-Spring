@@ -19,20 +19,6 @@ public class StudentServiceImpl implements IStudentService{
     }
 
 
-//    @Override
-//    public List<Student> searchStudents(String search) {
-//        List<Student> studentList = new ArrayList<>();
-//        for (Student s: students){
-//            if(s.getLastName().contains(search)){
-//                studentList.add(s);
-//            }
-//        }
-//        return studentList;
-//    }
-
-
-
-//
 @Override
 public Student save(Student student){
         return studentRepository.save(student);

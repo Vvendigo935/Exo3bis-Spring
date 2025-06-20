@@ -1,16 +1,19 @@
 package org.example.exercice3.controller;
 
+import org.example.exercice3.dao.StudentRepository;
 import org.example.exercice3.model.Student;
 import org.example.exercice3.service.IStudentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @Controller
 public class StudentController {
 
     private final IStudentService studentService;
-
+private StudentRepository studentRepository;
 
     public StudentController(IStudentService studentService){
         this.studentService = studentService;
@@ -28,9 +31,9 @@ public class StudentController {
         if(search == null){
             model.addAttribute("students",studentService.findAll());
         }
-//        else {
-//            model.addAttribute("students",studentService.findById(search);
-//        }
+        else {
+            model.addAttribute("students",studentRepository.findByName(search));
+        }
         return "list";
     }
 
@@ -53,6 +56,20 @@ public class StudentController {
     public String addStudent(@ModelAttribute("student") Student student){
         studentService.save(student);
         return "redirect:/students";
+    }
+
+    @GetMapping("/delete")
+    public String delete(@RequestParam("id") UUID id){
+        recipeService.delete(id);
+        return "redirect:/recipe/list";
+    }
+
+    @GetMapping("/update")
+    public String update(@RequestParam("id") UUID id,Model model){
+        Recipe recipe = recipeService.getById(id);
+        model.addAttribute("recipe",recipe);
+        model.addAttribute("categories",categoryService.getAll());
+        return "recipe-form";
     }
 
 }
